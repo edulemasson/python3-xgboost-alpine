@@ -27,3 +27,9 @@ RUN apk add --update --no-cache \
     rm -r /root/.cache && \
     rm -rf /src && \
     apk del .build-dependencies
+
+#SQL Server Dependencies
+RUN apk add ca-certificates freetds-dev g++ gcc unixodbc-dev cython
+RUN pip install --upgrade pip
+RUN pip install cython
+RUN pip install pymssql
