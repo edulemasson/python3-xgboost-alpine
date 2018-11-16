@@ -1,5 +1,5 @@
 IMAGE_NAME=eduardolemasson/xgboost-alpine
-VERSION=1.0
+VERSION=1.2
 CONTAINER_NAME=$(IMAGE_NAME)_$(VERSION)
 HOST_VOLUME=`pwd`
 CONTAINER_VOLUME=/app
@@ -38,7 +38,7 @@ rm:
 run:
 	@echo "-----------------------------------------------"
 	@echo "Building: " $(IMAGE_NAME):$(VERSION)
-	docker run --name $(CONTAINER_NAME) -v $(HOST_VOLUME):$(CONTAINER_VOLUME) -d $(IMAGE_NAME):$(VERSION)
+	docker run --name $(CONTAINER_NAME) --rm -v $(HOST_VOLUME):$(CONTAINER_VOLUME) $(IMAGE_NAME):$(VERSION)
 	@echo "-----------------------------------------------"
 
 tail:

@@ -1,4 +1,14 @@
-FROM python:3.6.3-alpine3.6
+FROM python:3.6-alpine
+
+ENV PYTHONUNBUFFERED=0
+
+COPY ./ app/
+
+RUN apk add ca-certificates freetds-dev g++ gcc unixodbc-dev cython
+RUN pip install --upgrade pip
+RUN pip install cython
+RUN pip install pymssql
+#RUN pip install -r /app/requirements.txt
 
 RUN apk add --update --no-cache \
     --virtual=.build-dependencies \
@@ -28,8 +38,7 @@ RUN apk add --update --no-cache \
     rm -rf /src && \
     apk del .build-dependencies
 
-#SQL Server Dependencies
-RUN apk add ca-certificates freetds-dev g++ gcc unixodbc-dev cython
-RUN pip install --upgrade pip
-RUN pip install cython
-RUN pip install pymssql
+
+WORKDIR /app
+
+CMD [ "python", "--version" ]
